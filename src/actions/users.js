@@ -3,7 +3,8 @@ import {SubmissionError} from 'redux-form';
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
-export const registerUser = user => dispatch => {
+// async action
+export const registerUser = user => dispatch => { // see below note for this
     return fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: {
@@ -25,3 +26,23 @@ export const registerUser = user => dispatch => {
             }
         });
 };
+
+// sync action
+export const syncAction = (payload) => {
+    return {
+        action: 'some action',
+        property: payload
+    };
+}
+
+/*-------------------------------------------------------------------------------------
+thunk middleware allows us to call a function inside an action creator
+
+thunk picks up the action and checks if the action is an object
+if it is, it carries on normally, otherwise,
+if it's a function, thunk will call it, passing dispatch in as argument
+
+dispatch function comes from thunk middleware, passed in as an argument
+-------------------------------------------------------------------------------------*/
+
+// fetch() returns a promise, comes back with a response, or res,

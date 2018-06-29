@@ -2,11 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 
-import HeaderBar from './header-bar';
-import LandingPage from './landing-page';
-import Dashboard from './dashboard';
-import RegistrationPage from './registration-page';
-import {refreshAuthToken} from '../actions/auth';
+import Clock from './clock.js';
+import HeaderBar from './header-bar.js';
+import LandingPage from './landing-page.js';
+import Dashboard from './dashboard.js';
+import RegistrationPage from './registration-page.js';
+import {refreshAuthToken} from '../actions/auth.js';
 
 export class App extends React.Component {
     componentDidUpdate(prevProps) {
@@ -26,7 +27,8 @@ export class App extends React.Component {
     startPeriodicRefresh() {
         this.refreshInterval = setInterval(
             () => this.props.dispatch(refreshAuthToken()),
-            60 * 60 * 1000 // One hour
+            60 * 15 * 1000 // 15 minutes
+            // 60 * 60 * 1000 // 1 hour
         );
     }
 
@@ -41,6 +43,7 @@ export class App extends React.Component {
     render() {
         return (
             <div className="app">
+                <Clock />
                 <HeaderBar />
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />

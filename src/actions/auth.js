@@ -39,7 +39,7 @@ const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(authSuccess(decodedToken.user));
-    saveAuthToken(authToken);
+    // saveAuthToken(authToken); // this saves authToken in local storage, disable this, and login is required each time the page refreshes
 };
 
 export const login = (username, password) => dispatch => {
